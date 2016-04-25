@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from boto.dynamodb.types import Dynamizer
 from boto.dynamodb2.types import (STRING, STRING_SET, BINARY, BINARY_SET,
                                   NUMBER_SET, LIST, MAP, BOOLEAN, NUMBER)
@@ -87,17 +89,10 @@ class BinaryAttribute(ScalarAttribute):
 
 class NumberAttribute(ScalarAttribute):
     type = NUMBER
-    accepts = int, float,
+    accepts = int, float, Decimal
 
     def _encode(self, value):
         return Dynamizer().encode(value)
-
-    def decode(self, value):
-        value = str(Dynamizer().decode(value))
-        if '.' in value:
-            return float(value)
-        else:
-            return int(value)
 
 
 class BooleanAttribute(ScalarAttribute):
