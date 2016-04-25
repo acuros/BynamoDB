@@ -67,7 +67,7 @@ class ScalarAttribute(Attribute):
 
     @classmethod
     def valid(cls, value):
-        return type(value) in cls.accepts
+        return isinstance(value, cls.accepts)
 
     def get_invalidation_message(self, value):
         return (
