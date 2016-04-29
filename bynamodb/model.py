@@ -84,7 +84,7 @@ class Model(object):
     def validate(self):
         for name, attr in self._get_attributes().items():
             attr_value = getattr(self, name, None)
-            if not attr_value:
+            if attr_value is None:
                 if not attr.null:
                     raise NullAttributeException(
                         'Attribute {0} cannot be null'.format(name))
